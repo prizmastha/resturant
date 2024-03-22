@@ -21,9 +21,11 @@ class Inventory(models.Model):
 class Recipe(models.Model):
     name=models.ForeignKey(Menu, on_delete=models.CASCADE)
     name_of_ingridients=models.ForeignKey(Inventory, related_name='ingredient_recipes', on_delete=models.CASCADE)
-    price_of_ingridients=models.ForeignKey(Inventory, related_name='price_recipes', on_delete=models.CASCADE)  
+    # price_of_ingridients=models.ForeignKey(Inventory, related_name='price_recipes', on_delete=models.CASCADE)  
+    qty_total=models.IntegerField()
+
     def __str__(self):
-        return self.name
+        return f" {self.name}"
     
 
 class Order(models.Model):
