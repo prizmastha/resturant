@@ -23,7 +23,7 @@ urlpatterns = [
     path('addrecipe/',views.RecipeCreate.as_view(), name='addrecipe'),
 
 
-    # path('viewsales/',views.salescreate.as_view(), name='sales'),
+    path('totalsales/',views.TotalSales.as_view(), name='indexoftotal'),
 
 
 ]  

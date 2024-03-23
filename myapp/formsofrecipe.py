@@ -7,9 +7,9 @@ class RecipeForm(forms.ModelForm):
        
     class Meta:
         model = Recipe
-        fields = ['name', 'name_of_ingridients','qty_total']
+        fields = ['name', 'name_of_ingridients','qty_in_recipe']
         widgets = {
-                    'qty_total':forms.TextInput(),
+                    'qty_in_recipe':forms.TextInput(),
 
         }
 

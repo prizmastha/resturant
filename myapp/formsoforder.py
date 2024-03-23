@@ -11,9 +11,9 @@ class OrderForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ['order_item', 'qty', 'table_number']
+        fields = ['order_item', 'qty_of_order', 'table_number']
         widgets = {
-            'qty': forms.TextInput(),
+            'qty_of_order': forms.TextInput(),
             'table_number': forms.TextInput(),
         }
 
