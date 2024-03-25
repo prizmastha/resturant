@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView,View,CreateView,UpdateView,DeleteView
@@ -70,22 +71,30 @@ class OrderCreate(CreateView):
     form_class=OrderForm
     template_name="resturant/order_form.html"
     success_url=reverse_lazy('myapp:indexoforder')
+    
     def form_valid(self, form):
         order = form.save(commit=False)
         order.save()
         
-        order_items = Recipe.objects.filter(name=order.order_item)
-        
-        for order_item in order_items:
-            # Calculate the quantity used for this order item
-            qty_used = order.qty_of_order * order_item.qty_in_recipe
-            # Get the related inventory item
-            inventory_item = Inventory.objects.get(item_name=order_item.name_of_ingridients.item_name)
-            # Update the inventory quantity
-            inventory_item.qty -= qty_used
-            inventory_item.save()
+        try:
+            order_items = Recipe.objects.filter(name=order.order_item)
+            
+            
+            for order_item in order_items:
+                qty_used = order.qty_of_order * order_item.qty_in_recipe
+                inventory_item = Inventory.objects.get(item_name=order_item.name_of_ingridients.item_name)
+                if inventory_item.qty > 0:
+                    inventory_item.qty -= qty_used
+                    inventory_item.save()
+                    
+                else:
+                    print("no")
+        except order_items.DoesNotExist:
+            return HttpResponse("orderitem doesnot exists!!!")
 
         return super().form_valid(form)
+       
+        
 
     
 
