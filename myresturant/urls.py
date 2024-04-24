@@ -19,5 +19,8 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('menu/',include("myapp.urls")),
+    path('', include("myapp.urls")),
+    # path('customuser/', include("customuser.urls")),
+    path('account/',include("django.contrib.auth.urls")),  # login logout pw change reset all authentication
+    path('api-auth/', include('rest_framework.urls'))
 ]

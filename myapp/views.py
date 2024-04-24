@@ -8,20 +8,25 @@ from myapp.formofinventory import InventoryForm
 from myapp.formsoforder import OrderForm
 from myapp.formsofrecipe import RecipeForm
 from django.db.models import Sum
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import AuthenticationForm
+
+
 
 
 
 # Create your views here.
 
 
-class Base(View):
+class Base(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
         return render(request,'resturant/base.html')
 
       
       
       
-class MenuList(ListView):
+class MenuList(LoginRequiredMixin,ListView):
     model=Menu
     context_object_name="menu"
     template_name="resturant/menu_list.html"
@@ -145,3 +150,14 @@ class TotalSales(ListView):
         except Order.DoesNotExist:
             # Handle the case where there are no orders
             return 0
+class LoginView(LoginView):
+    """
+    Display the login form and handle the login action.
+    """
+
+    form_class = AuthenticationForm
+    authentication_form = None
+    template_name = "registration/login.html"
+    redirect_authenticated_user = False
+    extra_context = None
+    

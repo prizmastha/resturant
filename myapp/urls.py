@@ -6,7 +6,7 @@ from django.conf import settings
 app_name="myapp"
 urlpatterns = [
     
-    path('home/',views.Base.as_view(),name='base'),
+    path('',views.Base.as_view(),name='base'),
     
     path('menulist/',views.MenuList.as_view(), name='indexofmenu'),
     path('menuadd/',views.MenuCreate.as_view(), name='menucreate'),
@@ -24,7 +24,9 @@ urlpatterns = [
 
 
     path('totalsales/',views.TotalSales.as_view(), name='indexoftotal'),
+     path("login/", views.LoginView.as_view(), name="login"),
 
+    
 
 ]  
 
