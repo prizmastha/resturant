@@ -137,5 +137,7 @@ REST_FRAMEWORK = {
 
 LOGIN_REDIRECT_URL="/"
 LOGIN_URL='/login/'
+LOGOUT_REDIRECT_URL = '/login/'
+
 
 AUTH_USER_MODEL="customuser.User"

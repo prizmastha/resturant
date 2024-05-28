@@ -33,7 +33,7 @@ class MenuList(LoginRequiredMixin,ListView):
     
 
 
-class MenuCreate(CreateView):
+class MenuCreate(CreateView):  
     model=Menu
     form_class=MenuForm
     template_name="resturant/menu_form.html"
@@ -161,3 +161,4 @@ class LoginView(LoginView):
     redirect_authenticated_user = False
     extra_context = None
     
+

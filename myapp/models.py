@@ -35,7 +35,7 @@ class Order(models.Model):
     qty_of_order=models.IntegerField()
     table_number=models.IntegerField()
     def __str__(self):
-        return f"Order {self.id} - Table {self.table_number}"
+        return f"Order {self.id} - Table { self.table_number}"
     
    
     

@@ -9,7 +9,11 @@
 
 
         {% block content %}
-
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+        
         <a href="{% url 'myapp:indexofmenu' %}" class="btn btn-outline-danger my-3">Menu</a>   <br>  
         <a href="{% url 'myapp:indexofinventory' %}" class="btn btn-outline-danger my-3">Inventory</a> <br>                
         <a href="{% url 'myapp:indexofrecipe' %}" class="btn btn-outline-danger my-3">Recipe</a>  <br>               
