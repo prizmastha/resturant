@@ -124,32 +124,31 @@ class RecipeCreate(CreateView):
     
     
 class TotalSales(ListView):
-    model=Order
+    model=Menu
     template_name="resturant/total_sales.html"
     
     
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.annotate(total_sales=Sum('order__qty_of_order'))
+        return queryset
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        # Calculate total sales
+        # Calculate total sales across all menu items
         total_sales = self.calculate_total_sales()
         context['total_sales'] = total_sales
         
         return context
 
     def calculate_total_sales(self):
-        try:
-            # Query the Order table to calculate the total sales
-            total_sales = Order.objects.aggregate(total_sales=Sum('qty_of_order'))['total_sales']
-
-            # If total sales is None, set it to 0
-            if total_sales is None:
-                total_sales = 0
-            
-            return total_sales
-        except Order.DoesNotExist:
-            # Handle the case where there are no orders
-            return 0
+        total_sales = Order.objects.aggregate(total_sales=Sum('qty_of_order'))['total_sales']
+        if total_sales is None:
+            total_sales = 0
+        return total_sales
+        
+        
 class LoginView(LoginView):
     """
     Display the login form and handle the login action.
@@ -162,3 +161,4 @@ class LoginView(LoginView):
     extra_context = None
     
 
+# testing

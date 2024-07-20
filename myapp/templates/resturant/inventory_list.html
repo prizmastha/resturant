@@ -10,7 +10,10 @@
     </head>
 
 
+
     <body>
+        <a href="{% url 'myapp:base' %}" class="btn btn-outline-danger my-3">Back to Dashboard</a>                
+
         <a href="{% url 'myapp:inventorycreate' %}" class="btn btn-outline-danger my-3">Add new ingrident</a>                
 
         {% for i in inventory %}

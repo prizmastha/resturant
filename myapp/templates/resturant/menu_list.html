@@ -11,8 +11,11 @@
 
 
     <body>
+        <a href="{% url 'myapp:base' %}" class="btn btn-outline-danger my-3">Back to Dashboard</a>                
+
         <a href="{% url 'myapp:menucreate' %}" class="btn btn-outline-danger my-3">Add new item</a>                
 
+        <a href="{% url 'myapp:addorder' %}" class="btn btn-outline-danger my-3">Add Order</a>                
 
         {% for m in menu %}
 
@@ -21,7 +24,6 @@
                
                 <p>Name= {{ m.name }}</p>
                 <p>Price= {{ m.price }}</p>
-                <a href="{% url 'myapp:addorder' %}" class="btn btn-outline-danger my-3">Add Order</a>                
         {% endfor %}
         {% endblock %}
 
